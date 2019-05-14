@@ -281,7 +281,7 @@ class ipa(object):
 
         return results
 
-    def user_mod(self, user, addattrs=[], setattrs=[], delattrs=[]):
+    def user_mod(self, user, addattrs=[], setattrs=[], delattrs=[], opts=None):
         m = {
             'method': 'user_mod',
             'item': [user],
@@ -299,6 +299,9 @@ class ipa(object):
             m['params']['setattr'] = setattrs
         if len(delattrs):
             m['params']['delattr'] = delattrs
+        if opts:
+            for k,v in opts.items():
+                m['params'][k] = v
 
         return self.makeReq(m)
 
